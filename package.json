@@ -1,13 +1,16 @@
 {
   "name": "fetch-backend-internship-challenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fetch Backend Internship Challenge",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Frederick Seo",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.3",

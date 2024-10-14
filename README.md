@@ -11,8 +11,7 @@ The transactions that are implemented are:
 ## Documentation
 
 - [Development Tools](#development-tools)
-- [Installation](#installation)
-- [Scripts](#scripts)
+- [Quick Start](#quick-start)
 - [API Reference](#api-reference)
     - [/add [POST] (Add Points)](#1-add-points)
     - [/spend [POST] (Spend Points)](#2-spend-points)
@@ -34,9 +33,35 @@ To ensure proper TypeScript functionality, the following TypeScript types are in
 - [`@types/express`](https://www.npmjs.com/package/@types/express) (v5.0.0): TypeScript definitions for Express.
 - [`@types/node`](https://www.npmjs.com/package/@types/node) (v22.7.5): TypeScript definitions for Node.js.
 
-## Installation
+## Quick Start
 
-## Scripts
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/wdragj/Fetch-Backend-Internship-Challenge.git
+    ```
+2. **Cd into the project directory**:
+    ```bash
+    cd Fetch-Backend-Internship-Challenge
+    ```
+3. **Install dependencies**:
+    ```bash
+    npm install
+    ```
+4. **Start the server**:
+    - **For Development**: (For most development tasks, running `npm run dev` is sufficient)
+        - **Run the development server** (To run the project directly with ts-node without needing a dist folder):
+            ```bash
+            npm run dev
+            ```
+    - **For Production**:
+        - **Build the project for production** (Compiles the TypeScript files into JavaScript and stores them in the `dist/` folder):
+            ```bash
+            npm run build
+            ```
+        - **Run the production build** (runs the compiled JavaScript files from the `dist/` folder):r
+            ```bash
+            npm start
+            ```
 
 ## API Reference
 
