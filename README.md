@@ -8,14 +8,19 @@ The transactions that are implemented are:
 - Spending points
 - Fetching the current point balance
 
+### Assignment note:
+
+**Although we normally keep track of many users with different IDs/accounts, this functionality is out of the scope of the assignment. Your code can assume it is only working with a single user and their point transactions.**
+
 ## Documentation
 
 - [Development Tools](#development-tools)
 - [Quick Start](#quick-start)
 - [API Reference](#api-reference)
-    - [/add [POST] (Add Points)](#1-add-points)
-    - [/spend [POST] (Spend Points)](#2-spend-points)
-    - [/balance [GET] (Get Balance)](#3-get-balance)
+    - [POST /add (Add Points)](#1-add-points)
+    - [POST /spend (Spend Points)](#2-spend-points)
+    - [GET /balance (Get Balance)](#3-get-balance)
+- [Testing](#testing)
 
 ## Development Tools
 
@@ -24,14 +29,19 @@ The following tools are used in this project:
 - [`Node.js`](https://nodejs.org/en) (v20.18.0): Backend JavaScript runtime.
 - [`Express`](https://expressjs.com/) (v4.21.1): Web framework for building the API.
 - [`TypeScript`](https://www.typescriptlang.org/) (v5.6.3): Typed superset of JavaScript for safer development.
+- [`Jest`](https://jestjs.io/) (v29.7.0): Testing framework for JavaScript and TypeScript.
 - [`Nodemon`](https://www.npmjs.com/package/nodemon) (v3.1.7): Hot-reload tool to restart the server automatically when files change.
+- [`Supertest`](https://www.npmjs.com/package/supertest) (v7.0.0): HTTP assertions library for testing API endpoints.
+- [`ts-jest`](https://www.npmjs.com/package/ts-jest) (v29.2.5): Jest TypeScript preprocessor with source map support.
 - [`ts-node`](https://www.npmjs.com/package/ts-node) (v10.9.2): TypeScript execution engine to run .ts files directly.
 - [`Body-parser`](https://www.npmjs.com/package/body-parser) (v1.20.3): Middleware to parse incoming JSON request bodies.
 
 To ensure proper TypeScript functionality, the following TypeScript types are included:
 
 - [`@types/express`](https://www.npmjs.com/package/@types/express) (v5.0.0): TypeScript definitions for Express.
+- [`@types/jest`](https://www.npmjs.com/package/@types/jest) (v29.5.13): TypeScript definitions for Jest.
 - [`@types/node`](https://www.npmjs.com/package/@types/node) (v22.7.5): TypeScript definitions for Node.js.
+- [`@types/supertest`](https://www.npmjs.com/package/@types/supertest) (v6.0.2): TypeScript definitions for Supertest.
 
 ## Quick Start
 
@@ -86,7 +96,10 @@ All endpoints are served at `http://localhost:8000`.
 
 - **Response**:
     - Status `200`: Points added successfully. No response body.
-    - Status `400`: Invalid request body. No response body.
+    - Status `400`:
+        - Invalid request: Invaid body length. No response body.
+        - Invalid request: Payer, points, or timestamp is missing. No response body.
+        - Invalid request: Invalid data types for payer, points, or timestamp. No response body.
 
 ### 2. Spend Points
 
@@ -111,8 +124,10 @@ All endpoints are served at `http://localhost:8000`.
         ]
         ```
 
-    - Status `400`: Invalid request body. No response body.
-    - Status `400`: Insufficient points. No response body.
+    - Status `400`:
+        - Invalid request: Invaid body length. No response body.
+        - Invalid request: Invalid or missing points. No response body.
+        - Invalid request: Not enough points. No response body.
 
 ### 3. Get Balance
 
@@ -127,3 +142,16 @@ All endpoints are served at `http://localhost:8000`.
             "UNILEVER": 0,
             "MILLER COORS": 5300
         }
+        ```
+
+## Testing
+
+To run the tests, use the following command:
+
+```bash
+npm run test
+```
+
+This will run the Jest test suite and output the results in the terminal.  
+
+This assignment is designed to handle transactions for a single user rather than multiple users with different IDs or accounts, which limits the variety of tests. Additionally, since no database is used, the testing focuses solely on the API endpoints and their functionality.

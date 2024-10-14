@@ -7,17 +7,29 @@ interface Transaction {
     timestamp: Date;
 }
 
-// Global variables
-let transactions: Transaction[] = []; // Transactions history represented as Transactions array to store all transactions
-let pointsBalance: Record<string, number> = {}; // Points balance represented as Record<string, number> to store points balance by payer
+// Initialize transactions and points balance
+export let transactions: Transaction[] = []; // Transactions history represented as Transactions array to store all transactions
+export let pointsBalance: Record<string, number> = {}; // Points balance represented as Record<string, number> to store points balance by payer
 
 // POST /add Endpoint
 export const addPoints = (req: Request, res: Response) => {
     const { payer, points, timestamp } = req.body; // Destructure payer, points, and timestamp from request body
 
-    // Check if payer, points, or timestamp is missing
-    if (!payer || !points || !timestamp) {
-        res.status(400).json({ error: "Invalid request body" }); // Return a status code of 400 and a message saying the request body is invalid
+    // Check for valid request body length
+    if (Object.keys(req.body).length !== 3) {
+        res.status(400).send("Invalid request: Invalid body length"); // Return a status code of 400 and a message saying the request body length is invalid
+        return;
+    }
+
+    // Check if 'payer', 'points', or 'timestamp' is missing in the request body
+    if (typeof payer === 'undefined' || typeof points === 'undefined' || typeof timestamp === 'undefined') {
+        res.status(400).send("Invalid request: 'payer', 'points', or 'timestamp' is missing"); // Return a status code of 400 and a message saying the payer, points, or timestamp is missing
+        return;
+    }
+
+    // Check for valid types
+    if (typeof payer !== "string" || typeof points !== "number" || typeof timestamp !== "string") {
+        res.status(400).send("Invalid request: Invalid data types for payer, points, or timestamp"); // Return a status code of 400 and a message saying the data types are invalid
         return;
     }
 
@@ -40,18 +52,36 @@ export const addPoints = (req: Request, res: Response) => {
 export const spendPoints = (req: Request, res: Response) => {
     const { points } = req.body; // Destructure points from request body
 
-    // Check if points is missing or invalid
-    if (!points || points <= 0) {
-        res.status(400).json({ error: "Invalid points" }); // Return a status code of 400 and a message saying the points are invalid
+    // Check for valid request body length
+    if (Object.keys(req.body).length !== 1) {
+        res.status(400).send("Invalid request: Invalid body length"); // Return a status code of 400 and a message saying the request body length is invalid
+        return;
+    }
+
+    // Check if 'points' is missing in the request body
+    if (typeof points === 'undefined') {
+        res.status(400).send("Invalid request: 'points' is missing"); // Return a status code of 400 and a message saying the points are missing
+        return;
+    }
+
+    // Check for valid type
+    if (typeof points !== "number") {
+        res.status(400).send("Invalid request: Invalid data type for points"); // Return a status code of 400 and a message saying the data type is invalid
+        return;
+    }
+
+    // Check if points is invalid
+    if (points <= 0) {
+        res.status(400).send("Invalid request: Invalid points"); // Return a status code of 400 and a message saying the points are invalid
         return;
     }
 
     // Calculate total points
     const totalPoints = Object.values(pointsBalance).reduce((sum, curr) => sum + curr, 0);
 
-     // Check if a request was made to spend more points than what a user has in total
+    // Check if a request was made to spend more points than what a user has in total
     if (points > totalPoints) {
-        res.status(400).send("Not enough points."); // Return a status code of 400 and a message saying the user does not have enough points
+        res.status(400).send("Invalid request: Not enough points"); // Return a status code of 400 and a message saying the user does not have enough points
         return;
     }
 

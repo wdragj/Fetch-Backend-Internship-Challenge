@@ -14,7 +14,11 @@ app.post('/add', addPoints);
 app.post('/spend', spendPoints);
 app.get('/balance', getBalance);
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Prevent the server from starting automatically when running tests
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+export default app;
