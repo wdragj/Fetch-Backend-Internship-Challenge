@@ -97,9 +97,9 @@ All endpoints are served at `http://localhost:8000`.
 - **Response**:
     - Status `200`: Points added successfully. No response body.
     - Status `400`:
-        - Invalid request: Invaid body length. No response body.
-        - Invalid request: Payer, points, or timestamp is missing. No response body.
-        - Invalid request: Invalid data types for payer, points, or timestamp. No response body.
+        - Invalid request: Invalid body length. No response body.
+        - Invalid request: 'payer', 'points', or 'timestamp' is missing. No response body.
+        - Invalid request: Invalid data types for payer, points. No response body.
 
 ### 2. Spend Points
 
@@ -126,7 +126,9 @@ All endpoints are served at `http://localhost:8000`.
 
     - Status `400`:
         - Invalid request: Invaid body length. No response body.
-        - Invalid request: Invalid or missing points. No response body.
+        - Invalid request: 'points' is missing. No response body.
+        - Invalid request: Invalid data type for points. No response body.
+        - Invalid request: Invalid points. No response body.
         - Invalid request: Not enough points. No response body.
 
 ### 3. Get Balance
