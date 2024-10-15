@@ -68,7 +68,7 @@ To ensure proper TypeScript functionality, the following TypeScript types are in
             ```bash
             npm run build
             ```
-        - **Run the production build** (runs the compiled JavaScript files from the `dist/` folder):r
+        - **Run the production build** (runs the compiled JavaScript files from the `dist/` folder):
             ```bash
             npm start
             ```
@@ -93,6 +93,10 @@ All endpoints are served at `http://localhost:8000`.
         "timestamp": "2020-11-02T14:00:00Z"
     }
     ```
+    - Example `curl` in Windows CMD:
+        ```bash
+        curl -X POST http://localhost:8000/add -H "Content-Type: application/json" -d "{\"payer\": \"DANNON\", \"points\": 5000, \"timestamp\": \"2020-11-02T14:00:00Z\"}"
+        ```
 
 - **Response**:
     - Status `200`: Points added successfully. No response body.
@@ -111,6 +115,10 @@ All endpoints are served at `http://localhost:8000`.
     ```json
     { "points": 5000 }
     ```
+    - Example `curl` in Windows CMD:
+        ```bash
+        curl -X POST http://localhost:8000/spend -H "Content-Type: application/json" -d "{\"points\": 5000}"
+        ```
 
 - **Response**:
 
@@ -136,6 +144,12 @@ All endpoints are served at `http://localhost:8000`.
 - **Route**: `/balance`
 - **Method**: `GET`
 - **Description**: Get the current point balance per payer.
+- **Request (example)**:
+    - Example `curl` in Windows CMD:
+        ```bash
+        curl -X GET http://localhost:8000/balance
+        ```
+
 - **Response**: This endpoint always return a 200 and give a response body similar to the following:
     - Status `200`: 
         ```json

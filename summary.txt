@@ -1,0 +1,32 @@
+1. Why did you choose the tools, libraries, and language you used for the coding exercise?
+    - Node.js: I chose Node.js as the backend runtime because of its non-blocking, event-driven architecture, which is ideal for handling the asynchronous nature of point transactions (adding, spending, and fetching balances). Since users may be interacting with their point balances concurrently, Node.js allows for handling multiple requests efficiently without blocking operations.
+    - Express: I chose Express as the web framework due to its simplicity and effectiveness in building REST APIs. Express provides an easy way to handle routes, which are helpful in tracking point transactions. Express is lightweight with minimal overhead and it allows easy integration of other tools, such as body parsers and authentication systems, which could be helpful when scaling this assessment to a bigger project.
+    - TypeScript: TypeScript was chosen to enhance code quality. TypeScript has static typing, which is essential when dealing with complex objects like transactions, which contains payers, points, and timestamps. TypeScript helps catch potential bugs at compile-time, reducing the likelihood of runtime errors. The added type safety ensures data consistency throughout the project, making it easier to maintain and extend.
+    - Body-parser: Body-parser was included to parse incoming JSON requests, particularly for the add and spend endpoints, where the server needs to read the request body and process transactions. This middleware simplifies extracting and handling JSON data from requests, allowing for clean and structured access to the data.
+    - Jest, Supertest, and ts-jest: I used Jest along with Supertest to test the API endpoints, ensuring that adding, spending, and fetching points behave as expected. Jest is a simple and quick testing framework, while Supertest makes it easy to simulate HTTP requests and assert responses, which is important when validating the API behavior. ts-jest was used to allow Jest to process TypeScript files.
+    - Nodemon and ts-node: I included Nodemon to automatically restart the server whenever code changes are detected during development. This can be helpful as a developer because it improves developer productivity and speeds up the feedback loop during development. ts-node allows TypeScript files to be executed directly, removing the need for an additional build step during development, which speeds up the development process.
+
+2. What are the advantages and disadvantages of your solution?
+    - Advantages:
+        1. Scalability: The non-blocking architecture of Node.js ensures the API can handle multiple point transactions simultaneously, making it scalable for future use cases where more transactions or users may be added.
+        2. Type Safety: The use of TypeScript ensures that all transactions (payer, points, and timestamp) are correctly typed, reducing errors and improving the overall reliability of the API, especially when handling different types of transactions.
+        3. Test Coverage: The inclusion of unit and integration tests ensures the API functions correctly and edge cases are handled.
+
+    - Disadvantages:
+        1. No Persistent Storage: The current implementation stores transactions in memory, meaning all data is lost when the server restarts. In a production setting, a database like PostgreSQL would be necessary to persist transaction data and ensure continuity.
+        2. TypeScript Overhead: Although TypeScript provides many benefits, it introduces additional overhead. However I think having type safety outweighs the disadvantages of having overhead.
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
+    - Project Overview:
+        - One of my favorite personal projects was the development of Madison Timeline, a social networking platform built to enhance communication and collaboration within the University of Wisconsin - Madison community. The platform aims for students to connect, share restaurant reviews, class notes, and other campus related content.
+        - This project required a full stack development approach, utilizing Next.js for the front-end, Vercel Functions (running on the Node.js runtime) for the backend, and Supabase with PostgreSQL for database management.
+    
+    - Challenges:
+        - A significant challenge was planning and implementing the database schema and adapting to an entirely new tech stack.
+        - Though well-documented, learning to work with Vercel Functions as serverless functions was surprising to me. Setting up and understanding how to integrate them effectively into our project took some time. Working with Supabase and PostgreSQL also took some time because it was an unfamiliar architecture.
+        - Planning and designing the database schema wasn’t such an easy task. I had to carefully consider the relationships between different entities, such as the users, posts, boards, and comments tables. This involved planning how these tables would interact, especially when dealing with user-generated content like posts and comments across multiple boards.
+
+    - Response:
+        - To overcome these difficulties, I spent a considerable amount of time reading documentation from both Vercel and Supabase and writing test code to ensure I was implementing the architecture correctly.
+        - With planning and designing the database schema, I had active communication with my project members to brainstorm together on how we should effectively plan and design the database schema.
+        - The process was challenging, but through persistent learning, testing, and communication, I was able to successfully integrate these technologies into the project.
